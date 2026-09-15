@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -32,6 +32,12 @@
             font-size: 15px;
             cursor: pointer;
             margin-right: 8px;
+            transition: all 0.2s ease;
+        }
+        button.ativo {
+            background-color: #58A4B0;
+            color: white;
+            border-color: #58A4B0;
         }
     </style>
 </head>
@@ -66,36 +72,42 @@
         const contLikes = document.getElementById('likes');
         const contDeslikes = document.getElementById('deslikes');
 
+        // Função que atualiza os contadores e o visual dos botões
+        function atualizar() {
+            contLikes.textContent = likes;
+            contDeslikes.textContent = deslikes;
+            btnLike.classList.toggle('ativo', curtiu);
+            btnDeslike.classList.toggle('ativo', descurtiu);
+        }
+
         btnLike.addEventListener('click', () => {
-            if (!curtiu) {
+            if (curtiu) {
+                likes--;
+                curtiu = false;
+            } else {
                 likes++;
                 curtiu = true;
                 if (descurtiu) {
                     deslikes--;
                     descurtiu = false;
                 }
-            } else {
-                likes--;
-                curtiu = false;
             }
-            contLikes.textContent = likes;
-            contDeslikes.textContent = deslikes;
+            atualizar();
         });
 
         btnDeslike.addEventListener('click', () => {
-            if (!descurtiu) {
+            if (descurtiu) {
+                deslikes--;
+                descurtiu = false;
+            } else {
                 deslikes++;
                 descurtiu = true;
                 if (curtiu) {
                     likes--;
                     curtiu = false;
                 }
-            } else {
-                deslikes--;
-                descurtiu = false;
             }
-            contLikes.textContent = likes;
-            contDeslikes.textContent = deslikes;
+            atualizar();
         });
     </script>
 </body>
