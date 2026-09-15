@@ -1,44 +1,102 @@
     <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiosidades</title>
+    <style>
+        header {
+            background-color: #58A4B0;
+            color: #FFFFFF;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        main {
+            background-color: #FFFFFF;
+            color: #58A4B0;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        main img {
+            width: 100%;
+            height: auto;
+        }
+        button {
+            padding: 8px 16px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            background: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minha página sobre curiosidades de programação</h1>
+        <p>Aqui vou compartilhar fatos e curiosidades científicas presentes em nosso cotidiano, de forma didática e acessível a todos.</p>
+    </header>
 
-    <html lang="en">
-           <head>
-             <meta charset="UTF-8">
-             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-             <title>curiosidades</title>
-             <style> 
-                header {   
-               background-color: #58A4B0;
-               color: #FFFFFF;    
-               text-align: center; 
-               max-width: 800px;
-               margin: 0 auto;
-               padding: 16px;         
-               }
-               main {
-               background-color: #FFFFFF;
-               color: #58A4B0;
-               max-width: 800px;
-               margin: 0 auto;
-               padding: 16px;     
-              } 
-           </style>     
-       </head>   
-      <body>
-           <header>
-             <h1>Minha página sobre curiosidades de proramação</h1>
-             <p1>Aqui vou compartilhar fatos e curiosidades científicas presentes em nosso cotidiano, de forma didática e acessível a todos.</p1>
-          </header>
-          <main>
-             <img src="imagem-coriosidades.png"
-              alt="logotipo conceitual de tecnologia e curiosidades: um livro aberto de onde emege um célebro digital brilhante, cercado por ícones de wi-fi, circuitos e lÂ,pada de ideias. cores em tonsde azul e  vermelho">
-          <div>
-                  <h2>meu primeiro post</h2>
-             <p>por: Vykthor gabryel garcia kuehl</p>
-             <p>boas vindas as minhas curiosidades!!!!a qui vou compartilhar curiosidades na parte de tecnologia e programação.</p>
-              <button>❤️​ <span>0 </span></button>
-              <button>🤮​ <span>0</span></button>                            
-          </div>     
-        </main>
-     </body>
- </html> 
- 
+    <main>
+        <img src="imagem-curiosidades.png"
+             alt="Logotipo conceitual de tecnologia e curiosidades: um livro aberto de onde emerge um cérebro digital brilhante, cercado por ícones de wi-fi, circuitos e lâmpada de ideias. Cores em tons de azul e vermelho.">
+
+        <div>
+            <h2>Meu primeiro post</h2>
+            <p>Por: Vykthor Gabryel Garcia Kuehl</p>
+            <p>Boas-vindas às minhas curiosidades!!!! Aqui vou compartilhar curiosidades na parte de tecnologia e programação.</p>
+
+            <button id="btnLike">❤️ <span id="likes">0</span></button>
+            <button id="btnDeslike">🤮 <span id="deslikes">0</span></button>
+        </div>
+    </main>
+
+    <script>
+        let likes = 0;
+        let deslikes = 0;
+        let curtiu = false;
+        let descurtiu = false;
+
+        const btnLike = document.getElementById('btnLike');
+        const btnDeslike = document.getElementById('btnDeslike');
+        const contLikes = document.getElementById('likes');
+        const contDeslikes = document.getElementById('deslikes');
+
+        btnLike.addEventListener('click', () => {
+            if (!curtiu) {
+                likes++;
+                curtiu = true;
+                if (descurtiu) {
+                    deslikes--;
+                    descurtiu = false;
+                }
+            } else {
+                likes--;
+                curtiu = false;
+            }
+            contLikes.textContent = likes;
+            contDeslikes.textContent = deslikes;
+        });
+
+        btnDeslike.addEventListener('click', () => {
+            if (!descurtiu) {
+                deslikes++;
+                descurtiu = true;
+                if (curtiu) {
+                    likes--;
+                    curtiu = false;
+                }
+            } else {
+                deslikes--;
+                descurtiu = false;
+            }
+            contLikes.textContent = likes;
+            contDeslikes.textContent = deslikes;
+        });
+    </script>
+</body>
+</html>
