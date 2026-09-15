@@ -20,9 +20,20 @@
             margin: 0 auto;
             padding: 16px;
         }
-        main img {
+        main img,
+        main svg {
             width: 100%;
             height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        article {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        article:last-child {
+            border-bottom: none;
         }
         button {
             padding: 8px 16px;
@@ -48,65 +59,131 @@
     </header>
 
     <main>
-        <img src="imagem-curiosidades.png"
-             alt="Logotipo conceitual de tecnologia e curiosidades: um livro aberto de onde emerge um cérebro digital brilhante, cercado por ícones de wi-fi, circuitos e lâmpada de ideias. Cores em tons de azul e vermelho.">
+        <!-- POST 1 -->
+        <article>
+            <img src="imagem-curiosidades.png"
+                 alt="Logotipo conceitual de tecnologia e curiosidades: um livro aberto de onde emerge um cérebro digital brilhante, cercado por ícones de wi-fi, circuitos e lâmpada de ideias. Cores em tons de azul e vermelho.">
 
-        <div>
             <h2>Meu primeiro post</h2>
             <p>Por: Vykthor Gabryel Garcia Kuehl</p>
             <p>Boas-vindas às minhas curiosidades!!!! Aqui vou compartilhar curiosidades na parte de tecnologia e programação.</p>
 
-            <button id="btnLike">❤️ <span id="likes">0</span></button>
-            <button id="btnDeslike">🤮 <span id="deslikes">0</span></button>
-        </div>
+            <button class="btnLike">❤️ <span class="likes">0</span></button>
+            <button class="btnDeslike">🤮 <span class="deslikes">0</span></button>
+        </article>
+
+        <!-- POST 2 -->
+        <article>
+            <!-- Imagem em SVG (não precisa de arquivo externo) -->
+            <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" role="img"
+                 aria-label="Ilustração de um bug (inseto) estilizado sobre linhas de código, representando o primeiro bug de computador.">
+                <defs>
+                    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0f2027"/>
+                        <stop offset="100%" stop-color="#58A4B0"/>
+                    </linearGradient>
+                </defs>
+                <rect width="800" height="300" fill="url(#bgGrad)"/>
+
+                <!-- linhas de código -->
+                <g stroke="#9be7f0" stroke-width="3" stroke-linecap="round" opacity="0.55">
+                    <line x1="60" y1="60"  x2="320" y2="60"/>
+                    <line x1="60" y1="90"  x2="420" y2="90"/>
+                    <line x1="60" y1="120" x2="260" y2="120"/>
+                    <line x1="60" y1="150" x2="380" y2="150"/>
+                    <line x1="60" y1="180" x2="300" y2="180"/>
+                    <line x1="60" y1="210" x2="440" y2="210"/>
+                    <line x1="60" y1="240" x2="240" y2="240"/>
+                </g>
+
+                <!-- corpo do "bug" -->
+                <ellipse cx="600" cy="150" rx="55" ry="75" fill="#e63946"/>
+                <ellipse cx="600" cy="150" rx="55" ry="75" fill="none" stroke="#fff" stroke-width="4"/>
+                <line x1="600" y1="75" x2="600" y2="225" stroke="#fff" stroke-width="4"/>
+
+                <!-- cabeça -->
+                <circle cx="600" cy="60" r="28" fill="#1d1d1d" stroke="#fff" stroke-width="4"/>
+                <circle cx="590" cy="55" r="5" fill="#fff"/>
+                <circle cx="610" cy="55" r="5" fill="#fff"/>
+
+                <!-- antenas -->
+                <line x1="585" y1="38" x2="555" y2="10" stroke="#1d1d1d" stroke-width="4" stroke-linecap="round"/>
+                <line x1="615" y1="38" x2="645" y2="10" stroke="#1d1d1d" stroke-width="4" stroke-linecap="round"/>
+
+                <!-- pernas -->
+                <g stroke="#1d1d1d" stroke-width="5" stroke-linecap="round">
+                    <line x1="548" y1="120" x2="500" y2="100"/>
+                    <line x1="548" y1="150" x2="490" y2="150"/>
+                    <line x1="548" y1="180" x2="500" y2="200"/>
+                    <line x1="652" y1="120" x2="700" y2="100"/>
+                    <line x1="652" y1="150" x2="710" y2="150"/>
+                    <line x1="652" y1="180" x2="700" y2="200"/>
+                </g>
+
+                <!-- texto -->
+                <text x="60" y="285" fill="#ffffff" font-family="monospace" font-size="22" opacity="0.9">
+                    &lt;bug&gt; encontrado!
+                </text>
+            </svg>
+
+            <h2>O primeiro "bug" da história</h2>
+            <p>Por: Vykthor Gabryel Garcia Kuehl</p>
+            <p>Em <strong>9 de setembro de 1947</strong>, engenheiros da Universidade de Harvard encontraram uma mariposa presa dentro do computador <em>Mark II</em>. Eles colaram o inseto no diário de bordo com a anotação <em>"first actual case of bug being found"</em> (primeiro caso real de um bug encontrado). Desde então, "bug" virou sinônimo de erro em programas — e "debug" é o ato de caçá-los. 🐛</p>
+
+            <button class="btnLike">❤️ <span class="likes">0</span></button>
+            <button class="btnDeslike">🤮 <span class="deslikes">0</span></button>
+        </article>
     </main>
-      <script>
-        let likes = 0;
-        let deslikes = 0;
-        let curtiu = false;
-        let descurtiu = false;
 
-        const btnLike = document.getElementById('btnLike');
-        const btnDeslike = document.getElementById('btnDeslike');
-        const contLikes = document.getElementById('likes');
-        const contDeslikes = document.getElementById('deslikes');
+    <script>
+        // Agora o script funciona para VÁRIOS posts, não só um.
+        document.querySelectorAll('article').forEach(artigo => {
+            let likes = 0;
+            let deslikes = 0;
+            let curtiu = false;
+            let descurtiu = false;
 
-        // Função que atualiza os contadores e o visual dos botões
-        function atualizar() {
-            contLikes.textContent = likes;
-            contDeslikes.textContent = deslikes;
-            btnLike.classList.toggle('ativo', curtiu);
-            btnDeslike.classList.toggle('ativo', descurtiu);
-        }
+            const btnLike = artigo.querySelector('.btnLike');
+            const btnDeslike = artigo.querySelector('.btnDeslike');
+            const contLikes = artigo.querySelector('.likes');
+            const contDeslikes = artigo.querySelector('.deslikes');
 
-        btnLike.addEventListener('click', () => {
-            if (curtiu) {
-                likes--;
-                curtiu = false;
-            } else {
-                likes++;
-                curtiu = true;
-                if (descurtiu) {
-                    deslikes--;
-                    descurtiu = false;
-                }
+            function atualizar() {
+                contLikes.textContent = likes;
+                contDeslikes.textContent = deslikes;
+                btnLike.classList.toggle('ativo', curtiu);
+                btnDeslike.classList.toggle('ativo', descurtiu);
             }
-            atualizar();
-        });
 
-        btnDeslike.addEventListener('click', () => {
-            if (descurtiu) {
-                deslikes--;
-                descurtiu = false;
-            } else {
-                deslikes++;
-                descurtiu = true;
+            btnLike.addEventListener('click', () => {
                 if (curtiu) {
                     likes--;
                     curtiu = false;
+                } else {
+                    likes++;
+                    curtiu = true;
+                    if (descurtiu) {
+                        deslikes--;
+                        descurtiu = false;
+                    }
                 }
-            }
-            atualizar();
+                atualizar();
+            });
+
+            btnDeslike.addEventListener('click', () => {
+                if (descurtiu) {
+                    deslikes--;
+                    descurtiu = false;
+                } else {
+                    deslikes++;
+                    descurtiu = true;
+                    if (curtiu) {
+                        likes--;
+                        curtiu = false;
+                    }
+                }
+                atualizar();
+            });
         });
     </script>
 </body>
