@@ -138,10 +138,10 @@
     <script>
         // Agora o script funciona para VÁRIOS posts, não só um.
         document.querySelectorAll('article').forEach(artigo => {
-            let likes = 999;
-            let deslikes = 999;
-            let curtiu = false;
-            let descurtiu = false;
+            let likes = 0;
+            let deslikes = 0;
+            let curtiu = 999;
+            let descurtiu = 999;
 
             const btnLike = artigo.querySelector('.btnLike');
             const btnDeslike = artigo.querySelector('.btnDeslike');
