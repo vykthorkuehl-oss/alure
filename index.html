@@ -212,53 +212,88 @@
     </main>
 
     <script>
-        document.querySelectorAll('article').forEach(artigo => {
-            let likes = 0;
-            let deslikes = 0;
-            let curtiu = false;
-            let descurtiu = false;
+        // Aguarda o DOM carregar completamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleciona todos os articles
+            const articles = document.querySelectorAll('article');
+            
+            articles.forEach(function(artigo) {
+                let likes = 0;
+                let deslikes = 0;
+                let curtiu = false;
+                let descurtiu = false;
 
-            const btnLike = artigo.querySelector('.btnLike');
-            const btnDeslike = artigo.querySelector('.btnDeslike');
-            const contLikes = artigo.querySelector('.likes');
-            const contDeslikes = artigo.querySelector('.deslikes');
+                // Seleciona os elementos dentro deste article específico
+                const btnLike = artigo.querySelector('.btnLike');
+                const btnDeslike = artigo.querySelector('.btnDeslike');
+                const contLikes = artigo.querySelector('.likes');
+                const contDeslikes = artigo.querySelector('.deslikes');
 
-            if (!btnLike || !btnDeslike || !contLikes || !contDeslikes) return;
+                // Se algum elemento não existir, pula este article
+                if (!btnLike || !btnDeslike || !contLikes || !contDeslikes) {
+                    return;
+                }
 
-            function atualizar() {
-                contLikes.textContent = likes;
-                contDeslikes.textContent = deslikes;
-                btnLike.classList.toggle('ativo', curtiu);
-                btnDeslike.classList.toggle('ativo', descurtiu);
-            }
-
-            btnLike.addEventListener('click', () => {
-                if (curtiu) {
-                    likes--;
-                    curtiu = false;
-                } else {
-                    likes++;
-                    curtiu = true;
+                // Função para atualizar a interface
+                function atualizar() {
+                    contLikes.textContent = likes;
+                    contDeslikes.textContent = deslikes;
+                    
+                    // Atualiza as classes dos botões
+                    if (curtiu) {
+                        btnLike.classList.add('ativo');
+                    } else {
+                        btnLike.classList.remove('ativo');
+                    }
+                    
                     if (descurtiu) {
-                        deslikes--;
-                        descurtiu = false;
+                        btnDeslike.classList.add('ativo');
+                    } else {
+                        btnDeslike.classList.remove('ativo');
                     }
                 }
-                atualizar();
-            });
 
-            btnDeslike.addEventListener('click', () => {
-                if (descurtiu) {
-                    deslikes--;
-                    descurtiu = false;
-                } else {
-                    deslikes++;
-                    descurtiu = true;
+                // Evento de clique no botão de like
+                btnLike.addEventListener('click', function() {
                     if (curtiu) {
+                        // Se já curtiu, remove o like
                         likes--;
                         curtiu = false;
+                    } else {
+                        // Se não curtiu, adiciona o like
+                        likes++;
+                        curtiu = true;
+                        
+                        // Se tinha descurtido, remove o deslike
+                        if (descurtiu) {
+                            deslikes--;
+                            descurtiu = false;
+                        }
                     }
-                }
+                    atualizar();
+                });
+
+                // Evento de clique no botão de deslike
+                btnDeslike.addEventListener('click', function() {
+                    if (descurtiu) {
+                        // Se já descurtiu, remove o deslike
+                        deslikes--;
+                        descurtiu = false;
+                    } else {
+                        // Se não descurtiu, adiciona o deslike
+                        deslikes++;
+                        descurtiu = true;
+                        
+                        // Se tinha curtido, remove o like
+                        if (curtiu) {
+                            likes--;
+                            curtiu = false;
+                        }
+                    }
+                    atualizar();
+                });
+
+                // Inicializa a interface
                 atualizar();
             });
         });
